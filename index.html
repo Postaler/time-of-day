@@ -5,100 +5,104 @@
     <title>Time of Day</title>
     <meta name="robots" content="noindex,nofollow">
     <style>
-		* {padding:0; margin:0;}
-		html {background-color:#ccc;}
-		body {
-			font-family: Arial, Helvetica, sans-serif;
-			max-width:960px; /* keeps from getting too large on wide screen */
-			width:90%; /* shrink to fit screen */
-			margin:auto; /* center in html element */
-			background-color:#fff;
-			padding:20px;
-			min-height:100%; /* keeps from getting too large on wide screen */
-			}
-		img.flexible {
-			float:right;
-			display:inline-block;
-			padding:20px;
-			max-width:300px; /* actual size of image */
-			width:33%; /* approximate size taken on screen in maximum view */
+        * {padding:0; margin:0;}
+        html {
+            background-color: #ec6e31; /* Fix for html background */
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 960px;
+            width: 90%;
+            margin: auto;
+            background-color: #622608; /* Background for body */
+            padding: 20px;
+            min-height: 100%;
+        }
+        img.flexible {
+            float:right;
+            display:inline-block;
+            padding:20px;
+            max-width:300px;
+            width:33%;
+        }
+        p {margin:10px;
+			color: #483722;
+			font-weight: 550;
 		}
-		p {margin:10px;}
-		h1,h2,h3,h4,h5,h6{
-			font-weight:normal;
-			margin:10px;
-			}
-		h1.masthead {margin-top:0;}
-		footer {
-			text-align:center;
-			clear:both; /* ride below all items */
+
+        h1{
+
+            font-weight:bold;
+            margin:10px;
+			color: white
+
 		}
+		
+		h2,h3,h4,h5,h6{
+            font-weight: 600;
+            margin:10px;
+			color: #483722
+        }
+
+        h1.masthead {margin-top:0;}
+        footer {
+            text-align:center;
+            clear:both;
+        }
     </style>
 </head>
 <body>
-	<header>
-		<h1 class="masthead">Time of Day</h1>
-	</header>
+    <header>
+        <h1 class="masthead">Time of Day</h1>
+    </header>
     <main>
-	 <header><h3>A JavaScript Project by Andrei Novozhilov</h3></header>
-	 <h3 id="my-greeting">Greeting!</h3>
-	    <p>Explain what your page does and how it works here!</p>
-	  <img src="http://dummyimage.com/300x400" alt="Time of Day Image" class="flexible">
-     <footer>
-      <p><small>&copy; 2022 by 
-          Andrei Novozhilov, All Rights Reserved ~ 
-          <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
-          <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
-     </p>
-    </footer>
-  </main>
- <script>
-
-/*
+        <header><h3>A JavaScript Project by Andrei Novozhilov</h3></header>
+        <h3 id="my-greeting">Greeting!</h3>
+        <p>JavaScript determines the current hour, and presents a different image, custom message, and color based on each of the following times of day:<br>
+            Morning (5am to 12 noon)<br>
+            Afternoon (12 noon to 6pm)<br>
+            Evening (6pm to 11pm)<br>
+            Night (11pm to 5am)<br>
+			Each picture is a photo of me at different times of the day.</p>
 
 
-Use JavaScript to determine the current hour, and present a different image, custom message, and color based on each of the following times of day:
+        <img id="time-of-day-image" src="" alt="Time of Day Image" class="flexible">
+        <footer>
+            <p><small>&copy; 2022 by Andrei Novozhilov, All Rights Reserved ~ 
+                <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
+                <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
+            </p>
+        </footer>
+    </main>
+    <script>
+        // JavaScript logic for greeting and background color change based on time
+        myDate = new Date();
+        myHour = myDate.getHours();
+		let img = document.getElementById("time-of-day-image");
 
-Morning (5am to 12 noon)
-Afternoon (12 noon to 6pm)
-Evening (6pm to 11pm)
-Night (11pm to 5am)
+        if (myHour >=5 && myHour < 12) { 
+            mySentence = "Good Morning!";
+            myColor = "#ebbf9b"; // Background color for morning
+			img.src = "images/morning.jpg"
+        } else if (myHour >= 12 && myHour < 18) { 
+            mySentence = "Good Afternoon!";
+            myColor = "#f5b393"; // Background color for afternoon
+			img.src = "images/afternoon.jpg"
+        } else if (myHour >= 18 && myHour < 23) { // Background color for evening
 
+			mySentence = "Good Evening!"
+			myColor = "#e5ac7f"
+			img.src = "images/evening.jpg"
+		} else { // Background color for night 
 
+			mySentence = "Good Night!"
+			myColor = "#d9c6af"
+			img.src = "images/night.jpg"
+		}
 
-*/
-
-
-
-
-
-
-    document.getElementById("html-checker").setAttribute("href","https://validator.w3.org/nu/?doc=" + location.href);
-    document.getElementById("css-checker").setAttribute("href","https://jigsaw.w3.org/css-validator/validator?uri=" + location.href);  
-
-		myDate = new Date();
-	myHour = myDate.getHours();
-
-	if(myHour < 12 ){ 
-	//alert("good morning?");
-
-	mySentence = "Good Morning";
-	myColor = "red";
-	}else{ 
-
-	mySentence = "Good Afternoon";
-	myColor = "purple";
-	//alert("good afternoon!");
-
-	}
-
-
-	document.getElementById("my-greeting").innerHTML = mySentence;
-	document.body.style.backgroundColor = myColor;
-
-
-
-
-</script>
+        document.getElementById("my-greeting").innerHTML = mySentence;
+        document.querySelector("main").style.backgroundColor = myColor;
+	
+    </script>
 </body>
 </html>
