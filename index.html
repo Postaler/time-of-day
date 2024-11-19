@@ -20,7 +20,6 @@
         }
         img.flexible {
             float:right;
-            display:inline-block;
             padding:20px;
             max-width:300px;
             width:33%;
@@ -49,6 +48,29 @@
             text-align:center;
             clear:both;
         }
+
+
+        .time-icon {
+    display: inline-block;
+    background-color: #622608;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 2px 6px;
+    color: white;
+}
+
+#timeText {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+#dayText {
+    font-size: 14px;
+    font-weight: 400;
+    color:  white; 
+}
     </style>
 </head>
 <body>
@@ -68,7 +90,12 @@
 
         <img id="time-of-day-image" src="" alt="Time of Day Image" class="flexible">
         <footer>
-            <p><small>&copy; 2022 by Andrei Novozhilov, All Rights Reserved ~ 
+            <div id="timeIcon" class="time-icon">
+                <span id="timeText"></span>
+                <span id="dayText"></span>
+            </div>
+            
+            <p><small>&copy; 2024 by Andrei Novozhilov, All Rights Reserved ~ 
                 <a id="html-checker" href="https://validator.w3.org/" target="_blank">Check HTML</a> ~ 
                 <a id="css-checker" href="https://jigsaw.w3.org/css-validator/" target="_blank">Check CSS</a></small>
             </p>
@@ -79,6 +106,13 @@
         myDate = new Date();
         myHour = myDate.getHours();
 		let img = document.getElementById("time-of-day-image");
+        function updateTime() {
+        const now = new Date();
+        document.getElementById("timeText").textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById("dayText").textContent = now.toLocaleDateString([], { weekday: 'long' });
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
 
         if (myHour >=5 && myHour < 12) { 
             mySentence = "Good Morning!";
